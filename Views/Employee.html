@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách nhân viên</title>
+
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="../Assets/Css/Common/Common.css">
+
+    <!-- Css màn hình riêng -->
+    <link rel="stylesheet" href="../Assets/Css/Views/Employee/Employee.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- Phần tiêu đề trang -->
+        <div class="header">
+            <div class="page">
+                Danh sách nhân viên
+            </div>
+        </div>
+
+        <div class="content d-flex">
+
+            <!-- Phần sidebar -->
+            <div class="sidebar"></div>
+
+            <!-- Phần nội dung chính -->
+            <div class="main">
+
+                <!-- Toolbar  -->
+                <div id="toolBarEmployee" class="d-flex toolbarGrid">
+                    <div CommandType="Add" class="buttonItem">Thêm</div>
+                    <div CommandType="Edit" class="buttonItem">Sửa</div>
+                    <div CommandType="Delete" class="buttonItem">Xóa</div>
+                    <div CommandType="Refresh" class="buttonItem">Nạp</div>
+                    <div CommandType="Export" class="buttonItem">Xuất khẩu</div>
+                    <div CommandType="Import" class="buttonItem">Nhập khẩu</div>
+                </div>
+
+                <!-- Grid danh sách nhân viên -->
+                <div id="gridEmployee" Url="v1/employees" Toolbar="toolBarEmployee" ItemId="EmployeeId">
+                    <div class="column" style="display: none;">
+                        <div class="col" FieldName="EmployeeCode">Mã nhân viên</div>
+                        <div class="col" FieldName="FullName">Họ tên</div>
+                        <div class="col" FieldName="DateOfBirth" DataType="Date">Ngày sinh</div>
+                        <div class="col" FieldName="Gender" DataType="Enum" EnumName="Gender">Giới tính</div>
+                        <div class="col" FieldName="PhoneNumber">Số điện thoại</div>
+                        <div class="col" FieldName="Address">Địa chỉ</div>
+                        <div class="col" FieldName="Email">Email</div>
+                        <div class="col" FieldName="Salary" DataType="Number">Lương</div>
+                        <div class="col" FieldName="DepartmentName">Phòng ban</div>
+                    </div>
+                </div>
+
+                <!-- Form thêm mới -->
+                <div id="formEmployeeDetail" class="formDetail">
+                    <div class="formWrapp">
+                        <div class="formContent">
+                            <div class="row-item d-flex">
+                                <div class="control-item flex-1" >
+                                    <label for="">Họ tên <span style="color: red;">(*)</span></label>
+                                    <br>
+                                    <input type="text" FieldName="FullName" Require="true">
+                                </div>
+                                <div class="control-item control-right flex-1" >
+                                    <label for="">Mã nhân viên <span style="color: red;">(*)</span></label>
+                                    <br>
+                                    <input type="text" FieldName="EmployeeCode" Require="true">
+                                </div>
+                            </div>
+    
+                            <div class="row-item d-flex">
+                                <div class="control-item flex-1" >
+                                    <label for="">Giới tính</label>
+                                    <br>
+                                    <select FieldName="Gender" DataType="Enum" EnumName="Gender">
+                                        <option value="0">Nữ</option>
+                                        <option value="1">Nam</option>
+                                        <option value="2">Khác</option>
+                                    </select>
+                                </div>
+                                <div class="control-item control-right flex-1" >
+                                    <label for="">Ngày sinh</label>
+                                    <br>
+                                    <input type="date" FieldName="DateOfBirth" DataType="Date">
+                                </div>
+                            </div>
+    
+                            <div class="row-item d-flex">
+                                <div class="control-item flex-1" >
+                                    <label for="">Số điện thoại</label>
+                                    <br>
+                                    <input type="text" FieldName="PhoneNumber">
+                                </div>
+                                <div class="control-item control-right flex-1" >
+                                    <label for="">Email</label>
+                                    <br>
+                                    <input type="text" FieldName="Email">
+                                </div>
+                            </div>
+    
+                            <div class="row-item d-flex">
+                                <div class="control-item flex-1" >
+                                    <label for="">Mức lương <span style="color: red;">(*)</span></label>
+                                    <br>
+                                    <input type="number" FieldName="Salary" DataType="Number" Require="true">
+                                </div>
+                                <div class="control-item control-right flex-1" >
+                                    <label for="">Phòng ban</label>
+                                    <br>
+                                    <input type="text" FieldName="DepartmentName">
+                                </div>
+                            </div>
+    
+                            <div class="row-item d-flex">
+                                <div class="control-item flex-1">
+                                    <label for="">Địa chỉ</label>
+                                    <br>
+                                    <input type="text" FieldName="Address">
+                                </div>
+                            </div>
+    
+                            <div class="formBottom d-flex">
+                                <div class="btnSave btnForm" Command="Save">Lưu</div>
+                                <div class="btnCancel btnForm" Command="Cancel">Hủy</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Thư viện -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Dùng chung -->
+    <script src="../Scripts/Common/Enumeration.js"></script>
+    <script src="../Scripts/Common/Resource.js"></script>
+    <script src="../Scripts/Common/Constant.js"></script>
+    <script src="../Scripts/Common/Common.js"></script>
+    <script src="../Scripts/Base/BaseForm.js"></script>
+    <script src="../Scripts/Base/BaseGrid.js"></script>
+
+    <!-- Màn hình riêng -->
+    <script src="../Scripts/Views/Employee/EmployeeDetail.js"></script>
+    <script src="../Scripts/Views/Employee/Employee.js"></script>
+</body>
+
+</html>

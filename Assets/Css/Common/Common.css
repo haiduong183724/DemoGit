@@ -1,0 +1,153 @@
+.align-right{
+    text-align: right;
+}
+
+.align-center{
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 10px;
+    width: 95%;
+}
+
+th {
+    padding: 10px;
+    background: #d4cfcf;
+    border: 1px solid;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.formBottom.d-flex {
+    height: 40px;
+    justify-content: flex-end;
+}
+
+div.toolbarGrid {
+    height: 40px;
+    margin: 10px;
+    border: 1px solid;
+}
+
+.buttonItem {
+    padding: 10px;
+    border-right: 1px solid;
+    cursor: pointer;
+    background: #f7dbdb;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper{
+    height: auto;
+}
+
+.header{
+    height: 100px;
+    border: 1px solid;
+    text-align: center;
+    line-height: 100px;
+    font-size: 30px;
+}
+
+.content{
+    height: calc(100% - 100px);
+}
+
+
+.sidebar{
+    width: 200px;
+    border: 1px solid;
+}
+
+.main{
+    flex: 1;
+    border: 1px solid;
+}
+
+.selectedRow{
+    background: #c6c6f7;
+}
+
+.formDetail{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+
+div.formDetail input, div.formDetail select {
+    height: 30px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+div.formDetail select {
+    height: 34px;
+    width: 103%;
+}
+
+.row-item{
+    width: 100%;
+    height: 80px;
+}
+
+.flex-1{
+    flex: 1;
+}
+
+.control-right{
+    margin-left: 30px;
+}
+
+.btnForm {
+    border: 1px solid;
+    padding: 10px;
+    width: 40px;
+    margin: 10px;
+    height: 17px;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.formWrapp{
+    background: #808080cf;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.btnCancel.btnForm {
+    background: #d67a7a;
+    color: white;
+}
+
+.btnSave.btnForm {
+    background: #2929d2;
+    color: white;
+}
+
+.hide{
+    display: none;
+}
+
+.notValidControl{
+    border-color: red;
+}

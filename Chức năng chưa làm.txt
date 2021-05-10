@@ -1,0 +1,19 @@
+1. Làm chức năng xóa 
+2. Validate trùng mã
+3. Validate Email
+4. Validate số điện thoại
+5. Làm chức năng loading dữ liệu
+6. Show sweet alert cất, xóa thành công ( tự ẩn sau 3 giây )
+7. Vẽ form cảnh báo lỗi 
+8. Làm chức năng Multi select để xóa nhiều
+9. Làm Disable toolbar theo select
+10. Làm cho phép form detail di chuyển
+11. Làm lại combo enum, date cho đẹp ( sử dụng datepicker )
+12. Mở form tự động focus ô đầu tiên
+13. Sử dụng tabindex để nhập liệu
+14. Sử dụng phím tắt lên xuống để select
+15. Sử dụng phím tắt cho các button toolbar
+16. Validate độ dài các ô input
+17. Tự động sinh dấu phảy ngăn cách cho các ô số tiền
+18. Tự động chuẩn hóa chuỗi đối với các trường FullName khi nhập
+19. Làm danh sách phòng ban tương tự như danh sách nhân viên

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách phòng ban</title>
+
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="../Assets/Css/Common/Common.css">
+
+    <!-- Css màn hình riêng -->
+    <link rel="stylesheet" href="../Assets/Css/Views/Department/Department.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- Phần tiêu đề trang -->
+        <div class="header">
+            <div class="page">
+                Danh sách phòng ban
+            </div>
+        </div>
+
+        <div class="content d-flex">
+
+            <!-- Phần sidebar -->
+            <div class="sidebar"></div>
+
+            <!-- Phần nội dung chính -->
+            <div class="main">
+
+                <!-- Grid danh sách phòng ban -->
+                <div id="gridDepartment" Url="api/Department">
+                    <div class="col" FieldName="DepartmentCode">Mã phòng ban</div>
+                    <div class="col" FieldName="DepartmentName">Tên phòng ban</div>
+                    <div class="col" FieldName="CreatedDate" DataType="Date">Ngày tạo</div>
+                    <div class="col" FieldName="CreatedBy">Người tạo</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Thư viện -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Dùng chung -->
+    <script src="../Scripts/Common/Enumeration.js"></script>
+    <script src="../Scripts/Common/Resource.js"></script>
+    <script src="../Scripts/Common/Constant.js"></script>
+    <script src="../Scripts/Common/Common.js"></script>
+    <script src="../Scripts/Base/BaseGrid.js"></script>
+
+    <!-- Màn hình riêng -->
+    <script src="../Scripts/Views/Department/Department.js"></script>
+</body>
+
+</html>
