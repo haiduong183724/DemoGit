@@ -77,8 +77,9 @@ class BaseGrid {
 
         // Khởi tạo sự kiện khi chọn các dòng khác nhau
         me.grid.on("click", "tbody tr", function(){
-            // $(".selectedRow").removeClass("selectedRow");
-            console.log($(".selectedRow").length);
+            $(".selectedRow").filter(function(item){
+                $(".selectedRow").eq(item).removeClass("selectedRow");
+            });
             $(this).addClass("selectedRow");
         });
     }
