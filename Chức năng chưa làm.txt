@@ -1,9 +1,9 @@
-1. Làm chức năng xóa 
-2. Validate trùng mã
-3. Validate Email
-4. Validate số điện thoại
+1. Làm chức năng xóa V
+2. Validate trùng mã V
+3. Validate Email V
+4. Validate số điện thoại V
 5. Làm chức năng loading dữ liệu
-6. Show sweet alert cất, xóa thành công ( tự ẩn sau 3 giây )
+6. Show sweet alert cất, xóa thành công ( tự ẩn sau 3 giây )V
 7. Vẽ form cảnh báo lỗi 
 8. Làm chức năng Multi select để xóa nhiều
 9. Làm Disable toolbar theo select

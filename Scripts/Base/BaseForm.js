@@ -29,10 +29,10 @@ class BaseForm{
 
             switch(command){
                 case Resource.CommandForm.Save:  // Lưu
-                    me.save();
+                    me.save(true);
                     break;
                 case Resource.CommandForm.Cancel:  // Hủy
-                    me.cancel();
+                    me.cancel(false);
                     break;
             }
         });
@@ -105,7 +105,6 @@ class BaseForm{
     save(){
         let me = this,
             isValid = me.validateForm();
-
         // Kiểm tra validate form
         if(isValid){
             let data = me.getDataForm();
@@ -120,14 +119,12 @@ class BaseForm{
             url = me.Parent.urlAdd,
             method = Resource.Method.Post,
             urlFull = `${Constant.UrlPrefix}${url}`;
-            
         // Nếu edit thì sửa lại
         if(me.FormMode == Enumeration.FormMode.Edit){
             url = `${me.Parent.urlEdit}/${data[me.ItemId]}`;
             method = Resource.Method.Put;
             urlFull = `${Constant.UrlPrefix}${url}`;
         }
-
         // Gọi lên server cất dữ liệu
         CommonFn.Ajax(urlFull, method, data, function(response){
             if(response){
@@ -265,16 +262,92 @@ class BaseForm{
 
         return isValid;
     }
-
     // Hàm dùng cho các màn override lại: validate Trùng mã nhân viên hoặc các kiểu validate khác
     validateCustom(){
+        let me = this,
+            data = me.getDataForm(),
+            isValid = me.validateEmployeeId(); // Validate các trường bắt buộc nhập
+
+        if(isValid){
+            isValid = me.validateEmail(data); // Validate các trường nhập  số
+        }
+
+        if(isValid){
+            isValid = me.validatePhone(data); // Validate các trường ngày tháng
+        }
+        return isValid;
+    }
+    // hàm validate mã nhân viên
+    validateEmployeeId(){
+        let me = this,
+            data = me.getDataForm(),
+            dataFix = me.Parent.getSelectedRecord(),
+            dataCache = me.Parent.getDataServer();
+
+        for( var i = 0; i< dataCache.length; i++){
+            if(data.EmployeeCode == dataCache[i].EmployeeCode && dataCache[i].EmployeeCode !=  dataFix.EmployeeCode){
+                me.form.find("[FieldName='EmployeeCode']").each(function(){
+                    $(this).addClass("notValidControl");
+                    $(this).attr("title", "Mã nhân viên đã tồn tại, vui lòng nhập mã khác!");
+                });
+                return false;
+            }
+        }
+        $(this).removeClass("notValidControl");
         return true;
     }
-
+    //hàm validate số điện thoại
+    validatePhone(data){
+        let me =this,
+            filter = /\d{1}/g,
+            phone = data.PhoneNumber,
+            listNumber = phone.match(filter);
+        if(phone.length == 0){
+            return true;
+        }
+        if(listNumber.length != 10 || listNumber.length != phone.length){
+            me.form.find("[FieldName='PhoneNumber']").each(function(){
+                $(this).addClass("notValidControl");
+                $(this).attr("title", "Số điện thoại không hợp lệ");
+            });
+            return false;
+        }
+        $(this).removeClass("notValidControl");
+        return true;
+    }
+    // hàm kiểm tra email
+    validateEmail(data){
+        let me =this,
+            filter = /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/g,
+            email = data.Email;
+        if(email.length==0){
+            return true;
+        }
+        if(!filter.test(email) && email.length != 0){
+            me.form.find("[FieldName='Email']").each(function(){
+                $(this).addClass("notValidControl");
+                $(this).attr("title", "Email không hợp lệ");
+            });
+            return false;
+        }
+        $(this).removeClass("notValidControl");
+        return true;
+    }
     // Hủy sự kiện đóng form
-    cancel(){
+    cancel(state = true){
         let me = this;
-
         me.form.hide();
+        if(state){
+            if(me.FormMode == Enumeration.FormMode.Edit){
+                swal("Chỉnh sửa thành công", {
+                    timer:2000,
+                });
+            }
+            else{
+                swal("Đã thêm thành công !",{
+                    timer:2000,
+                });
+            }
+        }
     }
 }

@@ -77,8 +77,8 @@ class BaseGrid {
 
         // Khởi tạo sự kiện khi chọn các dòng khác nhau
         me.grid.on("click", "tbody tr", function(){
-            $(".selectedRow").removeClass("selectedRow");
-
+            // $(".selectedRow").removeClass("selectedRow");
+            console.log($(".selectedRow").length);
             $(this).addClass("selectedRow");
         });
     }
@@ -102,6 +102,7 @@ class BaseGrid {
                 console.log("Có lỗi khi lấy dữ liệu từ server");
             }
         });
+        return me.cacheData;
     }
 
      /**
@@ -298,10 +299,26 @@ class BaseGrid {
 
      /**
      * Hàm xóa
-     * NTXUAN 06.05.2021
+     * NHDUONG 11.05.2021
      */
     delete(){
-        
+        let me = this,
+            // lấy dữ liệu của đối tượng được chọn để xóa
+            data = me.getSelectedRecord(),
+            url =`${me.urlEdit}/${data.EmployeeId}`,
+            method = Resource.Method.Delete,
+            urlFull = `${Constant.UrlPrefix}${url}`;
+            // gửi yêu cầu xóa dl
+            CommonFn.Ajax(urlFull, method, data, function(response){
+                if(response){
+                    console.log("Cất dữ liệu thành công");
+                    
+                    // me.cancel();
+                    me.getDataServer();
+                }else{
+                    console.log("Có lỗi khi cất dữ liệu");
+                }
+            });
     }
 
     /**
