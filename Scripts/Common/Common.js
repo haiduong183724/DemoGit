@@ -78,3 +78,7 @@ CommonFn.Ajax = (url, method, data, fnCallBack, async = true) => {
         })
     }
 }
+CommonFn.fomatBool=(boolString)=>{
+    if(boolString == 0 || boolString == 'false') return false;
+    return true;
+}

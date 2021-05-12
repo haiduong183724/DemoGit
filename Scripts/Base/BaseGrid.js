@@ -39,51 +39,138 @@ class BaseGrid {
         // Khởi tạo các sự kiện cho toolbar
         if(toolbar){
             toolbar.find(".buttonItem").on("click", function(){
-                let commandType = $(this).attr("CommandType");
-
+                let commandType = $(this).attr("CommandType"),
+                    isClicked = CommonFn.fomatBool($(this).attr("click"));
+                console.log($(this).attr("click"));
+                console.log(isClicked);
                 switch(commandType){
                     case Resource.CommandType.Add: // Thêm mới
-                        me.add();
+                        if(isClicked){
+                            me.add();
+                        }
                         break;
                     case Resource.CommandType.Edit: // Sửa
-                        me.edit();
+                        if(isClicked){
+                            me.edit();
+                        }
                         break;
                     case Resource.CommandType.Delete: // Xóa
-                        me.delete();
+                        if(isClicked){
+                            me.delete();
+                        }
                         break;
                     case Resource.CommandType.Refresh: // Nạp
-                        me.refresh();
+                        if(isClicked){
+                            me.refresh();
+                        }
                         break;
                     case Resource.CommandType.Import: // Nhập khẩu
-                        me.import();
+                        if(isClicked){
+                            me.import();
+                        }
                         break;
                     case Resource.CommandType.Export: // Xuất khẩu
-                        me.export();
+                        if(isClicked){
+                            me.export();
+                        }
                         break;
                 }
             });
         }
 
         // Khởi tạo sự kiện select row
-        me.initEventSelectRow();
+        me.initEventSelectMultiRowOnCtrl();
+        // me.initEventSelectRow();
+        
     }
-
+    /**
+     * Hàm Disable toolbar khi chưa có mục tiêu đc chọn
+     * NHDUONG 12.5.2021
+     */
+    checkToolbar(){
+        let me = this,
+        toolbarId = me.grid.attr("Toolbar"),
+        toolbar = $(`#${toolbarId}`);
+        // kiểm tra có hàng nào được chọn chưa
+        if(!$(".selectedRow").length){// chưa có
+            if(toolbar){
+                toolbar.find(".buttonItem").filter(function(){
+                    let commandType = $(this).attr("CommandType");
+                    // disable các nút sửa xóa.
+                    switch(commandType){
+                        case Resource.CommandType.Edit: // Sửa
+                            $(this).attr('click','false' );
+                            $(this).addClass("disable");
+                            break;
+                        case Resource.CommandType.Delete: // Xóa
+                            $(this).attr('click','false');
+                            $(this).addClass("disable");
+                            break;
+                    }
+                });
+                    
+            }
+        }
+        else{//có
+            if(toolbar){
+                toolbar.find(".buttonItem").filter(function(){
+                    let commandType = $(this).attr("CommandType");
+                    // bỏ thuộc tính disable trên các nút sửa, xóa.
+                    switch(commandType){
+                        case Resource.CommandType.Edit: // Sửa
+                            $(this).attr('click','true');
+                            $(this).removeClass("disable");
+                            break;
+                        case Resource.CommandType.Delete: // Xóa
+                            $(this).attr('click','true');
+                            $(this).removeClass("disable");
+                            break;
+                    }
+                });
+                    
+            }
+        }
+    }
     /**
      * Khởi tạo sự kiện khi select dòng
      * NTXUAN 06.05.2021
      */
-    initEventSelectRow(){
+    initEventSelectRow(mode){
         let me = this;
-
         // Khởi tạo sự kiện khi chọn các dòng khác nhau
+        // Xóa các dòng đã được chọn
         me.grid.on("click", "tbody tr", function(){
             $(".selectedRow").filter(function(item){
-                $(".selectedRow").eq(item).removeClass("selectedRow");
+               $(this).removeClass("selectedRow");
             });
             $(this).addClass("selectedRow");
         });
     }
-
+    /**
+     * Khởi tạo sự kiên chọn nhiều dòng khi người dùng nhấn phím Ctrl
+     * NHDUONG 12.5.2021
+     */
+    initEventSelectMultiRowOnCtrl(){
+        let me = this,
+            checkCtrl=false;
+        // Bắt sự kiện nhấn phím Ctrl
+        $(document).keydown(function(event){
+            checkCtrl = event.ctrlKey;
+        });
+        $(document).keyup(function(event){
+            checkCtrl = false;
+        });
+        me.grid.on("click", "tbody tr", function(){
+            if(!checkCtrl){
+                $(".selectedRow").filter(function(item){
+                    $(this).removeClass("selectedRow");
+                 });
+            }
+            $(this).addClass("selectedRow");
+            me.checkToolbar();
+        });
+        
+    }
     /**
      * Hàm lấy dữ liệu từ server xong binding lên grid
      * CreatedBy: NTXUAN 06.05.2021
@@ -92,17 +179,21 @@ class BaseGrid {
         let me = this,
             url = me.grid.attr("Url"),
             urlFull = `${Constant.UrlPrefix}${url}`;
-
+        $("#loading").addClass("show");
         // Gọi ajax lấy dữ liệu trên server
         CommonFn.Ajax(urlFull, Resource.Method.Get, {}, function(response){
             if(response){
+                
                 me.cacheData = [...response];
-
                 me.loadData(response);
+                $("#loading").removeClass("show");
+                me.checkToolbar();
             }else{
-                console.log("Có lỗi khi lấy dữ liệu từ server");
+                $("#loading").removeClass("show");
+                swal("Có lỗi khi lấy dữ liệu từ server");
             }
         });
+        
         return me.cacheData;
     }
 
@@ -237,7 +328,7 @@ class BaseGrid {
         me.ItemId = me.grid.attr("ItemId");
 
         // Mặc định chọn dòng đầu tiên
-        me.grid.find("tbody tr").eq(0).addClass("selectedRow");
+        // me.grid.find("tbody tr").eq(0).addClass("selectedRow");
     }
 
     /**
@@ -295,7 +386,12 @@ class BaseGrid {
     refresh(){
         let me = this;
         
-        me.getDataServer();
+        
+        console.log(me.getDataServer());
+        $(".selectedRow").filter(function(item){
+            console.log("aaaa");
+            $(this).removeClass("selectedRow");
+         });
     }
 
      /**

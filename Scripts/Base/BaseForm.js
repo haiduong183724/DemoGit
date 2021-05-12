@@ -5,7 +5,6 @@ class BaseForm{
         // Lưu lại đối tượng form
         me.form = $(formId);
         me.formMode = null;
-
         // Khởi tạo các sự kiện form
         me.initEvents();
 
@@ -14,7 +13,9 @@ class BaseForm{
     // Khởi tạo các sự kiện form
     initEvents(){
        let me = this;
-
+       $( function() {
+        $( "#draggable" ).draggable();
+        } );
        // Khởi tạo các sự kiện click button
        me.initButtonClick();
     }
@@ -129,7 +130,6 @@ class BaseForm{
         CommonFn.Ajax(urlFull, method, data, function(response){
             if(response){
                 console.log("Cất dữ liệu thành công");
-
                 me.cancel();
                 me.Parent.getDataServer();
             }else{

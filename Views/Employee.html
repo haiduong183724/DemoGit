@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách nhân viên</title>
-
+    <!-- thư viện CSS-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- CSS chung -->
     <link rel="stylesheet" href="../Assets/Css/Common/Common.css">
 
@@ -35,12 +36,12 @@
 
                 <!-- Toolbar  -->
                 <div id="toolBarEmployee" class="d-flex toolbarGrid">
-                    <div CommandType="Add" class="buttonItem">Thêm</div>
-                    <div CommandType="Edit" class="buttonItem">Sửa</div>
-                    <div CommandType="Delete" class="buttonItem">Xóa</div>
-                    <div CommandType="Refresh" class="buttonItem">Nạp</div>
-                    <div CommandType="Export" class="buttonItem">Xuất khẩu</div>
-                    <div CommandType="Import" class="buttonItem">Nhập khẩu</div>
+                    <div CommandType="Add" class="buttonItem" click = "true">Thêm</div>
+                    <div CommandType="Edit" class="buttonItem"click = "true">Sửa</div>
+                    <div CommandType="Delete" class="buttonItem" click = "true">Xóa</div>
+                    <div CommandType="Refresh" class="buttonItem" click = "true">Nạp</div>
+                    <div CommandType="Export" class="buttonItem" click = "true">Xuất khẩu</div>
+                    <div CommandType="Import" class="buttonItem" click = "true">Nhập khẩu</div>
                 </div>
 
                 <!-- Grid danh sách nhân viên -->
@@ -57,11 +58,16 @@
                         <div class="col" FieldName="DepartmentName">Phòng ban</div>
                     </div>
                 </div>
-
-                <!-- Form thêm mới -->
-                <div id="formEmployeeDetail" class="formDetail">
+                <div class="formDetail" id = "loading">
                     <div class="formWrapp">
-                        <div class="formContent">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                    
+                <!-- Form thêm mới -->
+                <div id="formEmployeeDetail" class="formDetail ">
+                    <div class="formWrapp">
+                        <div class="formContent ui-widget-content" id = "draggable">
                             <div class="row-item d-flex">
                                 <div class="control-item flex-1" >
                                     <label for="">Họ tên <span style="color: red;">(*)</span></label>
@@ -141,8 +147,9 @@
     </div>
 
     <!-- Thư viện -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><!-- thư viện jquery -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> <!-- thư viện sweet alert -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- thư viện jquery ui -->
     <!-- Dùng chung -->
     <script src="../Scripts/Common/Enumeration.js"></script>
     <script src="../Scripts/Common/Resource.js"></script>

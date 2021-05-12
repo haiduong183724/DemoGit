@@ -2,13 +2,13 @@
 2. Validate trùng mã V
 3. Validate Email V
 4. Validate số điện thoại V
-5. Làm chức năng loading dữ liệu
+5. Làm chức năng loading dữ liệu V
 6. Show sweet alert cất, xóa thành công ( tự ẩn sau 3 giây )V
-7. Vẽ form cảnh báo lỗi 
-8. Làm chức năng Multi select để xóa nhiều
-9. Làm Disable toolbar theo select
-10. Làm cho phép form detail di chuyển
-11. Làm lại combo enum, date cho đẹp ( sử dụng datepicker )
+7. Vẽ form cảnh báo lỗi ?
+8. Làm chức năng Multi select để xóa nhiều  V
+9. Làm Disable toolbar theo select V
+10. Làm cho phép form detail di chuyển V
+11. Làm lại combo enum, date cho đẹp ( sử dụng datepicker ) X
 12. Mở form tự động focus ô đầu tiên
 13. Sử dụng tabindex để nhập liệu
 14. Sử dụng phím tắt lên xuống để select
