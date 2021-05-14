@@ -18,6 +18,8 @@ class BaseForm{
         } );
        // Khởi tạo các sự kiện click button
        me.initButtonClick();
+       me.handleKeyPress();
+       me.setTabIndex();
     }
 
     // Khởi tạo các sự kiện click button form
@@ -88,20 +90,18 @@ class BaseForm{
         let me = this;
 
         me.form.show();
-
         // reset dữ liệu
         me.resetForm();
     }
-
     // reset form
     resetForm(){
         let me = this;
 
         // Gán giá trị rỗng
+        me.form.find("[FieldName]").eq(0).focus();
         me.form.find("[FieldName]").val("");
         me.form.find(".notValidControl").removeClass("notValidControl");
     }
-
     // Lưu dữ liệu form
     save(){
         let me = this,
@@ -138,6 +138,50 @@ class BaseForm{
         });
     }
 
+    // xử lý khi nhấn nút
+    handleKeyPress(){
+        let me = this;
+        console.log("press a key");
+        $(document).keydown(function(event){
+            me.trapTabKey(event);
+        })
+    }
+    setTabIndex(){
+        let me = this, 
+        listTab = me.form.find("[Tab]");
+        listTab.filter(function(item){
+            listTab.eq(item).attr("tabindex",item+1);
+        });
+    }
+    // xử lý khi tab trong form
+    trapTabKey(e) {
+        // Check for TAB key press
+        let me = this,
+            listTab = me.form.find("[Tab]"),
+            firstTabStop = listTab[0],
+            lastTabStop = listTab[listTab.length-1];
+        if (e.keyCode === 9) {
+          // SHIFT + TAB
+          if (e.shiftKey) {
+            if (document.activeElement === firstTabStop) {
+                e.preventDefault();
+                lastTabStop.focus();
+            }
+    
+          // TAB
+          } else {
+            if (document.activeElement === lastTabStop) {
+                e.preventDefault();
+                firstTabStop.focus();
+            }
+          }
+        }
+    
+        // ESCAPE
+        if (e.keyCode === 27) {
+          closeModal();
+        }
+    }
     // Lấy dữ liệu form
     getDataForm(){
         let me = this,
@@ -174,7 +218,6 @@ class BaseForm{
 
         return value;
     }
-
     // Validate form 
     validateForm(){
         let me = this,

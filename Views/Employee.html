@@ -72,12 +72,12 @@
                                 <div class="control-item flex-1" >
                                     <label for="">Họ tên <span style="color: red;">(*)</span></label>
                                     <br>
-                                    <input type="text" FieldName="FullName" Require="true">
+                                    <input type="text" FieldName="FullName" Require="true" Tab = "1">
                                 </div>
                                 <div class="control-item control-right flex-1" >
                                     <label for="">Mã nhân viên <span style="color: red;">(*)</span></label>
                                     <br>
-                                    <input type="text" FieldName="EmployeeCode" Require="true">
+                                    <input type="text" FieldName="EmployeeCode" Require="true" Tab = "1">
                                 </div>
                             </div>
     
@@ -85,7 +85,7 @@
                                 <div class="control-item flex-1" >
                                     <label for="">Giới tính</label>
                                     <br>
-                                    <select FieldName="Gender" DataType="Enum" EnumName="Gender">
+                                    <select FieldName="Gender" DataType="Enum" EnumName="Gender" Tab = "1"> 
                                         <option value="0">Nữ</option>
                                         <option value="1">Nam</option>
                                         <option value="2">Khác</option>
@@ -94,7 +94,7 @@
                                 <div class="control-item control-right flex-1" >
                                     <label for="">Ngày sinh</label>
                                     <br>
-                                    <input type="date" FieldName="DateOfBirth" DataType="Date">
+                                    <input type="date" FieldName="DateOfBirth" DataType="Date" Tab = "1">
                                 </div>
                             </div>
     
@@ -102,12 +102,12 @@
                                 <div class="control-item flex-1" >
                                     <label for="">Số điện thoại</label>
                                     <br>
-                                    <input type="text" FieldName="PhoneNumber">
+                                    <input type="text" FieldName="PhoneNumber" Tab = "1">
                                 </div>
                                 <div class="control-item control-right flex-1" >
                                     <label for="">Email</label>
                                     <br>
-                                    <input type="text" FieldName="Email">
+                                    <input type="text" FieldName="Email" Tab = "1">
                                 </div>
                             </div>
     
@@ -115,12 +115,12 @@
                                 <div class="control-item flex-1" >
                                     <label for="">Mức lương <span style="color: red;">(*)</span></label>
                                     <br>
-                                    <input type="number" FieldName="Salary" DataType="Number" Require="true">
+                                    <input type="number" FieldName="Salary" DataType="Number" Require="true" Tab = "1">
                                 </div>
                                 <div class="control-item control-right flex-1" >
                                     <label for="">Phòng ban</label>
                                     <br>
-                                    <input type="text" FieldName="DepartmentName">
+                                    <input type="text" FieldName="DepartmentName" Tab = "1">
                                 </div>
                             </div>
     
@@ -128,13 +128,13 @@
                                 <div class="control-item flex-1">
                                     <label for="">Địa chỉ</label>
                                     <br>
-                                    <input type="text" FieldName="Address">
+                                    <input type="text" FieldName="Address" Tab = "1">
                                 </div>
                             </div>
     
                             <div class="formBottom d-flex">
-                                <div class="btnSave btnForm" Command="Save">Lưu</div>
-                                <div class="btnCancel btnForm" Command="Cancel">Hủy</div>
+                                <div class="btnSave btnForm" Command="Save" Tab = "1">Lưu</div>
+                                <div class="btnCancel btnForm" Command="Cancel" Tab = "1">Hủy</div>
                             </div>
                             
                         </div>

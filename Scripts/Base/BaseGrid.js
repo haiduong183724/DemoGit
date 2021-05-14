@@ -41,8 +41,6 @@ class BaseGrid {
             toolbar.find(".buttonItem").on("click", function(){
                 let commandType = $(this).attr("CommandType"),
                     isClicked = CommonFn.fomatBool($(this).attr("click"));
-                console.log($(this).attr("click"));
-                console.log(isClicked);
                 switch(commandType){
                     case Resource.CommandType.Add: // Thêm mới
                         if(isClicked){
@@ -80,8 +78,6 @@ class BaseGrid {
 
         // Khởi tạo sự kiện select row
         me.initEventSelectMultiRowOnCtrl();
-        // me.initEventSelectRow();
-        
     }
     /**
      * Hàm Disable toolbar khi chưa có mục tiêu đc chọn
@@ -131,21 +127,58 @@ class BaseGrid {
             }
         }
     }
+    // /**
+    //  * Khởi tạo sự kiện khi select dòng
+    //  * NTXUAN 06.05.2021
+    //  */
+    // initEventSelectRow(mode){
+    //     let me = this;
+    //     // Khởi tạo sự kiện khi chọn các dòng khác nhau
+    //     // Xóa các dòng đã được chọn
+    //     me.grid.on("click", "tbody tr", function(){
+    //         $(".selectedRow").filter(function(item){
+    //            $(this).removeClass("selectedRow");
+    //         });
+    //         $(this).addClass("selectedRow");
+    //     });
+    // }
+
     /**
-     * Khởi tạo sự kiện khi select dòng
-     * NTXUAN 06.05.2021
+     * hàm khởi tạo sự kiện khi có một nút được nhấn xuống
+     * 
      */
-    initEventSelectRow(mode){
-        let me = this;
-        // Khởi tạo sự kiện khi chọn các dòng khác nhau
-        // Xóa các dòng đã được chọn
-        me.grid.on("click", "tbody tr", function(){
-            $(".selectedRow").filter(function(item){
-               $(this).removeClass("selectedRow");
-            });
-            $(this).addClass("selectedRow");
-        });
-    }
+    //  handleKeyPress(){
+    //     let me = this;
+    //     $(document).keydown(function(event){
+    //         switch (event.keyCode){
+    //             case 17:
+    //                 me.initEventSelectMultiRowOnCtrl(true);
+    //             case 9:
+    //                 me.trapTabKey(event);
+    //         }
+    //     });
+    // }
+/**
+ * 
+ * hàm xử lý tab trong form
+ */
+
+  
+
+    // /**
+    //  * Hàm khởi tạo sự kiện khi có một nút được nhả ra
+    //  *  
+    // */
+    // handleKeyRelease(){
+    //     let me = this;
+    //     $(document).keyup(function(event){
+    //         switch (event.keyCode){
+    //             case 17:
+    //                 me.initEventSelectMultiRowOnCtrl(false);
+    //             case 9:
+    //         }
+    //     })
+    // }
     /**
      * Khởi tạo sự kiên chọn nhiều dòng khi người dùng nhấn phím Ctrl
      * NHDUONG 12.5.2021
@@ -155,12 +188,19 @@ class BaseGrid {
             checkCtrl=false;
         // Bắt sự kiện nhấn phím Ctrl
         $(document).keydown(function(event){
-            checkCtrl = event.ctrlKey;
+            if(event.ctrlKey){
+                checkCtrl = true;
+                console.log(checkCtrl);
+            } 
         });
         $(document).keyup(function(event){
-            checkCtrl = false;
+            if(event.keyCode == 17) {
+                checkCtrl = false;
+                console.log(checkCtrl);
+            }
         });
         me.grid.on("click", "tbody tr", function(){
+            console.log(checkCtrl);
             if(!checkCtrl){
                 $(".selectedRow").filter(function(item){
                     $(this).removeClass("selectedRow");
@@ -169,7 +209,6 @@ class BaseGrid {
             $(this).addClass("selectedRow");
             me.checkToolbar();
         });
-        
     }
     /**
      * Hàm lấy dữ liệu từ server xong binding lên grid
